@@ -1,0 +1,53 @@
+﻿@model List<MvcApplication6.Models.Fav>
+@{
+    Layout = "~/Views/Shared/_layout2.cshtml";
+}
+
+<br>
+<br>
+<div style="text-align:center">
+    <img src="/images/p.jpg" />
+</div>
+
+@{
+    int i;
+    int j;
+    int temp;
+    string name;
+    bool flag=true;
+  for(i=1;i<=(Model.Count)-1;i++)
+  {
+      flag=false;
+      for(j=0;j<(Model.Count)-1;j++)
+      {
+          if (Model[j+1].vote>Model[j].vote)
+          {
+              temp = (int)Model[j].vote;
+              Model[j].vote = Model[j + 1].vote;
+              Model[j + 1].vote = temp;
+              name = Model[j].recipe_name;
+              Model[j].recipe_name = Model[j + 1].recipe_name;
+              Model[j + 1].recipe_name = name;
+              flag = true;
+          }
+          
+      }
+     
+  }
+  
+  foreach(var c in Model)
+      
+  {
+      <div style="text-align:center;border:solid;background-color:azure">
+          <br>
+         
+     @c.recipe_name
+          </div>
+  }
+  
+  }
+
+<div style="text-align:center">
+    For View any Recipe click here
+    <a href="/Home/FavList">Show Recipes</a>
+</div>
